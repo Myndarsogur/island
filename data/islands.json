@@ -1,0 +1,184 @@
+[
+  {
+    "id": "azores",
+    "name": "Azoreyjar",
+    "regionTagline": "Atlantic ink currents",
+    "colorA": "#A4D8E1",
+    "colorB": "#F4C7C3",
+    "shortDescription": "A living archive of oceanic folklore and new visual languages bridging local ateliers with global readers.",
+    "partners": [
+      {"name": "Lagoa Studio", "url": "#"},
+      {"name": "Atlantic Press", "url": "#"},
+      {"name": "Cobalt Residency", "url": "#"}
+    ]
+  },
+  {
+    "id": "canary",
+    "name": "Kanaríeyjar",
+    "regionTagline": "Volcanic print rituals",
+    "colorA": "#FFD2A1",
+    "colorB": "#B6C9FF",
+    "shortDescription": "Layered storytelling labs where heat, rhythm, and ancestral memory become serialized graphic form.",
+    "partners": [
+      {"name": "Tidal House", "url": "#"},
+      {"name": "Isla Lab", "url": "#"},
+      {"name": "Magma Editions", "url": "#"}
+    ]
+  },
+  {
+    "id": "orkney",
+    "name": "Orkney",
+    "regionTagline": "Stone-signal narratives",
+    "colorA": "#D7E6C8",
+    "colorB": "#F6D0E0",
+    "shortDescription": "A quiet observatory for time-spiral comics, where archaeology meets experimental page choreography.",
+    "partners": [
+      {"name": "North Loom", "url": "#"},
+      {"name": "Harbor Archive", "url": "#"},
+      {"name": "Glyph Foundry", "url": "#"}
+    ]
+  },
+  {
+    "id": "shetland",
+    "name": "Shetland",
+    "regionTagline": "Polar light panels",
+    "colorA": "#C7D5FF",
+    "colorB": "#FFE6A8",
+    "shortDescription": "A luminous hub for collaborative issues that map Arctic skies to immersive sequential art.",
+    "partners": [
+      {"name": "Aurora Guild", "url": "#"},
+      {"name": "Drift Comics", "url": "#"},
+      {"name": "Northwind Collective", "url": "#"}
+    ]
+  },
+  {
+    "id": "iceland",
+    "name": "Ísland",
+    "regionTagline": "Glacial ink observatory",
+    "colorA": "#DCE8FF",
+    "colorB": "#F5DFE8",
+    "shortDescription": "Studios mapping lava fields, ice light, and community sagas into crisp sequential experiments.",
+    "partners": [
+      {"name": "Blue Rift Studio", "url": "#"},
+      {"name": "Saga Print Lab", "url": "#"},
+      {"name": "Aurora Pages", "url": "#"}
+    ]
+  },
+  {
+    "id": "faroe",
+    "name": "Faroe Islands",
+    "regionTagline": "Cliffside signal press",
+    "colorA": "#CFEDEB",
+    "colorB": "#F2E6C7",
+    "shortDescription": "Wind-carved workshops translating sea-weave rhythms into tactile, small-run comics.",
+    "partners": [
+      {"name": "Harbor Loom", "url": "#"},
+      {"name": "Foghouse Editions", "url": "#"},
+      {"name": "Cliffline Lab", "url": "#"}
+    ]
+  },
+  {
+    "id": "west-ireland",
+    "name": "Vestureyjar við Írland",
+    "regionTagline": "Atlantic myth cartography",
+    "colorA": "#B7E4D1",
+    "colorB": "#EBC8B2",
+    "shortDescription": "A chorus of island voices charting migration, memory, and blue economies through graphic storytelling.",
+    "partners": [
+      {"name": "Cliffside Studio", "url": "#"},
+      {"name": "Seabird Press", "url": "#"},
+      {"name": "Gael Ink", "url": "#"}
+    ]
+  },
+  {
+    "id": "achill",
+    "name": "Achill",
+    "regionTagline": "Wild coast panels",
+    "colorA": "#E9D4FF",
+    "colorB": "#A9E5EE",
+    "shortDescription": "An experimental outpost for tactile comics, merging analog textures with bold narrative cadence.",
+    "partners": [
+      {"name": "Moorlight", "url": "#"},
+      {"name": "Seaweave Lab", "url": "#"},
+      {"name": "Traverse House", "url": "#"}
+    ]
+  },
+  {
+    "id": "madeira",
+    "name": "Madeira",
+    "regionTagline": "Terraced story gardens",
+    "colorA": "#CFE8A9",
+    "colorB": "#F4B6C2",
+    "shortDescription": "A living studio for botanical graphic narratives and collaborative residencies with global illustrators.",
+    "partners": [
+      {"name": "Ridge Atelier", "url": "#"},
+      {"name": "Botanic Press", "url": "#"},
+      {"name": "Harborlight", "url": "#"}
+    ]
+  },
+  {
+    "id": "cabo-verde",
+    "name": "Grænhöfðaeyjar (Cabo Verde)",
+    "regionTagline": "Creole rhythm frames",
+    "colorA": "#FFD7C9",
+    "colorB": "#9AD0EC",
+    "shortDescription": "A percussive network weaving diaspora voices and sound-based narrative experiments.",
+    "partners": [
+      {"name": "Pulse Cartel", "url": "#"},
+      {"name": "Maré Studio", "url": "#"},
+      {"name": "Nave Editions", "url": "#"}
+    ]
+  },
+  {
+    "id": "mindelo",
+    "name": "Grænhöfðaeyjar (Mindelo)",
+    "regionTagline": "Harbor of graphic jazz",
+    "colorA": "#BBD5FF",
+    "colorB": "#FFE4B5",
+    "shortDescription": "A sonic-fueled lab for serialized comics that translate improvisation into page design.",
+    "partners": [
+      {"name": "Blue Dock", "url": "#"},
+      {"name": "Linha Studio", "url": "#"},
+      {"name": "Verde Signal", "url": "#"}
+    ]
+  },
+  {
+    "id": "sao-tome",
+    "name": "São Tomé og Príncipe",
+    "regionTagline": "Equatorial ink tides",
+    "colorA": "#BEECD7",
+    "colorB": "#F7C6A5",
+    "shortDescription": "A lush narrative incubator focused on climate imaginaries and island-to-island solidarity.",
+    "partners": [
+      {"name": "Cacao House", "url": "#"},
+      {"name": "Equator Press", "url": "#"},
+      {"name": "Príncipe Lab", "url": "#"}
+    ]
+  },
+  {
+    "id": "bermuda",
+    "name": "Bermúda",
+    "regionTagline": "Triangle of futures",
+    "colorA": "#C9F0E4",
+    "colorB": "#E6C3F1",
+    "shortDescription": "An innovation hub for speculative comics, maritime tech myths, and luminous digital print.",
+    "partners": [
+      {"name": "Echo Wave", "url": "#"},
+      {"name": "Harbor Circuit", "url": "#"},
+      {"name": "Blue Meridian", "url": "#"}
+    ]
+  },
+  {
+    "id": "falklands",
+    "name": "Falklandseyjar",
+    "regionTagline": "Southern skyscapes",
+    "colorA": "#DDE7F5",
+    "colorB": "#F9D7C4",
+    "shortDescription": "A quiet constellation of creators exploring endurance, wildlife, and open-sea storytelling.",
+    "partners": [
+      {"name": "Windward", "url": "#"},
+      {"name": "Southlight Press", "url": "#"},
+      {"name": "Kelper Studio", "url": "#"}
+    ]
+  }
+]

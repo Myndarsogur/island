@@ -1,304 +1,84 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Island Comics Journal</title>
-  <meta name="description" content="Island Comics Journal connects island communities through comics, visual essays, and workshops." />
-  <meta name="theme-color" content="#f7f6f2" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Island Comics</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#island-field">Skip to island field</a>
 
-  <meta property="og:title" content="Island Comics" />
-  <meta property="og:description" content="Comics, visual essays, and workshops connecting island communities." />
-  <meta property="og:type" content="website" />
-  <!-- later: <meta property="og:image" content="https://islandcomics.org/og.png" /> -->
-
-  <style>
-    :root{
-      --paper:#f7f6f2;
-      --ink:#151515;
-      --muted:#5e6a73;
-      --line:#d9d7cf;
-      --card:#ffffff;
-      --wash:#eef3ff;
-      --wash2:#effaf3;
-      --accent:#1b5cff;
-      --accent2:#0a8f5c;
-      --shadow: 0 18px 60px rgba(10,20,30,.10);
-      --radius: 22px;
-      --max: 1080px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      color:var(--ink);
-      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
-      background:
-        radial-gradient(900px 520px at 10% 10%, rgba(27,92,255,.08), transparent 55%),
-        radial-gradient(900px 520px at 90% 20%, rgba(10,143,92,.08), transparent 55%),
-        radial-gradient(900px 520px at 50% 95%, rgba(240,170,70,.10), transparent 55%),
-        var(--paper);
-    }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px}
-
-    /* Header */
-    header{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:16px; padding:10px 0 22px;
-      border-bottom:1px solid var(--line);
-    }
-    .brand{display:flex; align-items:center; gap:14px; text-decoration:none}
-    .mark{
-      width:44px; height:44px; border-radius:14px;
-      border:1px solid var(--line);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(27,92,255,.20), transparent 55%),
-        radial-gradient(circle at 70% 70%, rgba(10,143,92,.18), transparent 55%),
-        #fff;
-      box-shadow: 0 10px 30px rgba(0,0,0,.08);
-    }
-    .brand h1{margin:0; font-size:16px; letter-spacing:.2px; font-weight:700}
-    .brand p{margin:0; color:var(--muted); font-size:12px; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial}
-    nav{display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end}
-    nav a{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      font-size:12px; text-decoration:none;
-      padding:8px 10px; border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.55);
-    }
-    nav a:hover{background:#fff}
-
-    /* Hero */
-    .hero{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:18px;
-      align-items:stretch;
-      margin-top:22px;
-    }
-    @media (max-width: 920px){ .hero{grid-template-columns:1fr} }
-
-    .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .heroMain{padding:26px 22px}
-    .kicker{
-      display:inline-flex; align-items:center; gap:8px;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      font-size:12px; color:var(--muted);
-      padding:7px 10px; border-radius:999px;
-      border:1px solid var(--line);
-      background: linear-gradient(90deg, rgba(27,92,255,.08), rgba(10,143,92,.06));
-    }
-    .dot{
-      width:8px; height:8px; border-radius:50%;
-      background:var(--accent);
-      box-shadow:0 0 0 6px rgba(27,92,255,.12);
-    }
-    h2{margin:14px 0 10px; font-size:46px; line-height:1.02; letter-spacing:-.6px}
-    @media (max-width: 520px){ h2{font-size:40px} }
-    .lead{
-      margin:0 0 18px;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.6;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    }
-
-    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
-    .btn{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      font-weight:700; font-size:13px;
-      text-decoration:none;
-      display:inline-flex; align-items:center; gap:9px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .btn.primary{
-      border-color:rgba(27,92,255,.25);
-      background: linear-gradient(180deg, rgba(27,92,255,.12), rgba(27,92,255,.06));
-    }
-    .btn.secondary{
-      border-color:rgba(10,143,92,.25);
-      background: linear-gradient(180deg, rgba(10,143,92,.10), rgba(10,143,92,.05));
-    }
-
-    /* Side modules */
-    .side{display:grid; grid-template-rows: 1fr 1fr; gap:18px}
-    .module{padding:18px 18px}
-    .module h3{
-      margin:0 0 6px;
-      font-size:16px;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    }
-    .module p{
-      margin:0 0 12px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.55;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    }
-    .list{margin:0; padding:0; list-style:none; display:grid; gap:8px}
-    .li{
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:10px 10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.7));
-      display:flex; gap:10px; align-items:flex-start;
-    }
-    .bullet{
-      width:10px; height:10px; border-radius:50%;
-      background:rgba(0,0,0,.18);
-      margin-top:4px; flex:0 0 auto;
-      box-shadow:0 0 0 5px rgba(0,0,0,.05);
-    }
-
-    /* Editorial strip */
-    .strip{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap:12px;
-    }
-    @media (max-width: 920px){ .strip{grid-template-columns:1fr} }
-    .strip .card{box-shadow:none}
-    .strip .card > div{padding:16px 16px}
-    .metaTitle{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      font-weight:800;
-      font-size:12px;
-      letter-spacing:.6px;
-      text-transform:uppercase;
-      color:rgba(0,0,0,.62);
-      margin-bottom:8px;
-    }
-    .metaBody{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.55;
-      margin:0;
-    }
-
-    /* Footer */
-    footer{
-      margin-top:22px;
-      padding-top:18px;
-      border-top:1px solid var(--line);
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      align-items:center;
-      justify-content:space-between;
-      color:var(--muted);
-      font-size:12px;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    }
-    .smalllinks{display:flex; gap:12px; flex-wrap:wrap}
-    .smalllinks a{color:var(--muted); text-decoration:none}
-    .smalllinks a:hover{color:var(--ink)}
-
-    /* Accessibility */
-    .btn:focus, nav a:focus{
-      outline: none;
-      box-shadow: 0 0 0 4px rgba(27,92,255,.18);
-      border-color: rgba(27,92,255,.35);
-    }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <a class="brand" href="#" aria-label="Island Comics">
-        <div class="mark" aria-hidden="true"></div>
-        <div>
+    <header class="hero section" id="top">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero__content">
+          <p class="hero__eyebrow">Island Comics Network</p>
           <h1>Island Comics</h1>
-          <p>Editorial platform for island communities</p>
+          <p class="hero__subtitle">
+            A global collaboration in graphic storytelling and island culture, linking
+            remote communities through shared visual languages.
+          </p>
+          <a class="cta" href="#island-field">Explore the islands</a>
         </div>
-      </a>
-
-      <nav>
-        <a href="#about">About</a>
-        <a href="#issues">Issues</a>
-        <a href="#workshops">Workshops</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      </div>
     </header>
 
-    <section class="hero" id="about">
-      <div class="card heroMain">
-        <div class="kicker"><span class="dot"></span>Atlantic • Archipelago • Visual storytelling</div>
-        <h2>Comics and visual essays from Atlantic archipelagos.</h2>
-        <p class="lead">
-          Island Comics publishes comics and visual essays, and runs workshop formats that
-          let people co-create public “walls” of art — physical and digital. Built for collaboration
-          across islands and coastal communities.
+    <main>
+      <div class="layout container">
+        <section class="field section" id="island-field" aria-labelledby="field-title">
+          <div class="field__header">
+            <h2 id="field-title">Island Field</h2>
+            <p>
+              Navigate the living map. Each island node opens a partner constellation
+              of studios, publishers, and experiments.
+            </p>
+          </div>
+
+          <div class="field__stage" data-field>
+            <svg class="field__lines" aria-hidden="true"></svg>
+            <div class="field__nodes" data-nodes></div>
+            <div class="field__aura" aria-hidden="true"></div>
+          </div>
+        </section>
+
+        <aside class="panel" id="island-panel" data-panel aria-live="polite" aria-label="Island details" aria-hidden="true">
+          <button class="panel__close" type="button" data-panel-close aria-label="Close panel">
+            Close
+          </button>
+          <div class="panel__content" data-panel-content>
+            <div class="panel__stripe" data-panel-stripe></div>
+            <h3 data-panel-title>Choose an island</h3>
+            <p data-panel-description>
+              Select a node to reveal the partner network and collaborative signals.
+            </p>
+            <div class="panel__section">
+              <h4>Partners</h4>
+              <ul class="panel__partners" data-panel-partners></ul>
+            </div>
+            <div class="panel__section">
+              <h4>Projects / Signals</h4>
+              <ul class="panel__signals" data-panel-signals>
+                <li>Residency exchange routing</li>
+                <li>Shared anthology pipeline</li>
+              </ul>
+            </div>
+            <a class="panel__cta" href="#">Contact / Become a partner</a>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="footer section">
+      <div class="container footer__inner">
+        <p>
+          Island Comics is a premium collaboration platform for creators shaping new
+          island narratives in print and digital form.
         </p>
-
-        <div class="actions">
-          <a class="btn primary" href="#contact">↗ Submit / Collaborate</a>
-          <a class="btn secondary" href="#workshops">↗ Host a workshop</a>
-          <a class="btn" href="#issues">↗ Explore issues</a>
-        </div>
-      </div>
-
-      <div class="side">
-        <div class="card module" id="issues">
-          <h3>Issues</h3>
-          <p>Editorial releases with island dossiers, open calls, and curated collaborations.</p>
-          <ul class="list">
-            <li class="li"><span class="bullet"></span><div><strong>Open call</strong><br><span style="color:var(--muted)">Short comics + visual essays.</span></div></li>
-            <li class="li"><span class="bullet"></span><div><strong>Island dossiers</strong><br><span style="color:var(--muted)">Azores, Canaries, Faroes, Iceland, etc.</span></div></li>
-          </ul>
-        </div>
-
-        <div class="card module" id="workshops">
-          <h3>Workshops</h3>
-          <p>Drop-in, multilingual formats for festivals, libraries, and schools.</p>
-          <ul class="list">
-            <li class="li"><span class="bullet"></span><div><strong>Public wall</strong><br><span style="color:var(--muted)">Participants add panels over time.</span></div></li>
-            <li class="li"><span class="bullet"></span><div><strong>Toolkits</strong><br><span style="color:var(--muted)">Prompts, templates, facilitation notes.</span></div></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="strip" aria-label="Editorial notes">
-      <div class="card"><div>
-        <div class="metaTitle">Purpose</div>
-        <p class="metaBody">Create shared language between islands through accessible visual storytelling.</p>
-      </div></div>
-      <div class="card"><div>
-        <div class="metaTitle">Format</div>
-        <p class="metaBody">Journal releases + workshop documentation + an explorable digital wall.</p>
-      </div></div>
-      <div class="card"><div>
-        <div class="metaTitle">Tone</div>
-        <p class="metaBody">Light, curious, public-facing. Editorial clarity without institutional stiffness.</p>
-      </div></div>
-    </section>
-
-    <footer id="contact">
-      <div>© <span id="y"></span> Island Comics</div>
-      <div class="smalllinks">
-        <a href="mailto:hello@islandcomics.org">hello@islandcomics.org</a>
-        <a href="#">Instagram</a>
-        <a href="#">Newsletter</a>
+        <a class="footer__cta" href="#">Start a collaboration</a>
       </div>
     </footer>
-  </div>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>
