@@ -180,6 +180,7 @@ main {
   min-height: clamp(24rem, 60vh, 40rem);
   overflow: hidden;
   padding: clamp(1rem, 3vw, 2rem);
+  --field-scale: 1;
   --drift-x: 0px;
   --drift-y: 0px;
   --line-drift-x: 0px;
@@ -257,6 +258,10 @@ main {
   gap: clamp(0.85rem, 2vw, 1.6rem);
   align-content: space-between;
   min-height: clamp(24rem, 60vh, 40rem);
+  transform: scale(var(--field-scale));
+  transform-origin: top center;
+  width: calc(100% / var(--field-scale));
+  margin: 0 auto;
 }
 
 .island-node {
@@ -302,8 +307,8 @@ main {
 }
 
 .island-node .node__island {
-  width: clamp(3rem, 9vw, 4rem);
-  max-height: 4rem;
+  width: clamp(4rem, 8vw, 5rem);
+  max-height: 5rem;
   aspect-ratio: 1 / 1;
   height: auto;
   object-fit: contain;
@@ -509,34 +514,25 @@ main {
     padding: clamp(1rem, 4vw, 1.5rem);
   }
 
-  .field__nodes {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-auto-rows: minmax(5rem, auto);
-  }
-
-  .island-node {
-    grid-column: var(--grid-col-mobile, auto) / span var(--grid-span-mobile, 1);
-    grid-row: var(--grid-row-mobile, auto);
-  }
-
   .panel {
     position: fixed;
-    inset: auto 0 0 0;
-    width: 100%;
-    min-height: 100dvh;
-    border-radius: 1.5rem 1.5rem 0 0;
-    transform: translateY(105%);
-    border-left: none;
-    border-bottom: none;
-    border-right: none;
+    inset: auto;
+    left: var(--panel-left, 50%);
+    top: var(--panel-top, 12%);
+    width: min(var(--panel-width, 420px), calc(100vw - 1.5rem));
+    max-height: 60vh;
+    border-radius: 1rem;
+    transform: translate(-50%, 0);
+    box-shadow: 0 18px 40px rgba(31, 47, 68, 0.18);
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
   }
 
   .panel.is-open {
-    transform: translateY(0%);
-  }
-
-  body.panel-open {
-    overflow: hidden;
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 

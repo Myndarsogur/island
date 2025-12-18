@@ -62,6 +62,15 @@ const maxGridRow = Math.max(
   ...Object.values(positions).map((pos) => pos.row + (pos.span ? pos.span - 1 : 0))
 );
 
+const syncFieldScale = () => {
+  const baseWidth = 1200;
+  const minScale = 0.7;
+  const maxScale = 1;
+  const width = fieldStage.getBoundingClientRect().width || baseWidth;
+  const clamped = Math.min(maxScale, Math.max(minScale, width / baseWidth));
+  fieldStage.style.setProperty("--field-scale", clamped.toFixed(3));
+};
+
 const mobilePlacements = (() => {
   const ordered = Object.entries(positions).sort((a, b) => {
     if (a[1].row === b[1].row) {
@@ -309,6 +318,51 @@ const updateAura = () => {
   aura.classList.add("is-visible");
 };
 
+const updatePanelPosition = () => {
+  if (!panel.classList.contains("is-open")) {
+    return;
+  }
+
+  if (!mobileSheetQuery.matches) {
+    panel.style.removeProperty("--panel-left");
+    panel.style.removeProperty("--panel-top");
+    panel.style.removeProperty("--panel-width");
+    return;
+  }
+
+  const node = activeId ? nodeMap.get(activeId) : null;
+  if (!node) {
+    return;
+  }
+
+  const stageRect = fieldStage.getBoundingClientRect();
+  const nodeRect = node.getBoundingClientRect();
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  const padding = 12;
+  const offset = 14;
+
+  const maxWidth = Math.min(viewportWidth - padding * 2, 420);
+  panel.style.setProperty("--panel-width", `${maxWidth}px`);
+
+  const panelRect = panel.getBoundingClientRect();
+  const measuredHeight = panelRect.height || viewportHeight * 0.6;
+  const panelHeight = Math.min(measuredHeight, viewportHeight * 0.6);
+  const anchorBelow = nodeRect.top + nodeRect.height / 2 < stageRect.top + stageRect.height / 2;
+
+  let top = anchorBelow ? nodeRect.bottom + offset : nodeRect.top - offset - panelHeight;
+  top = Math.max(padding, Math.min(top, viewportHeight - padding - panelHeight));
+
+  const halfWidth = (panelRect.width || maxWidth) / 2;
+  const minLeft = padding + halfWidth;
+  const maxLeft = viewportWidth - padding - halfWidth;
+  let left = nodeRect.left + nodeRect.width / 2;
+  left = Math.max(minLeft, Math.min(left, maxLeft));
+
+  panel.style.setProperty("--panel-left", `${left}px`);
+  panel.style.setProperty("--panel-top", `${top}px`);
+};
+
 const updateHighlightStates = () => {
   const anchorId = activeId || hoveredId;
   const related = new Set();
@@ -354,6 +408,10 @@ const openPanel = (id) => {
   panel.classList.add("is-open");
   document.body.classList.add("panel-open");
   syncPanelAria();
+  requestAnimationFrame(updatePanelPosition);
+  requestAnimationFrame(() => {
+    panelClose.focus({ preventScroll: true });
+  });
 };
 
 const closePanel = () => {
@@ -366,11 +424,16 @@ const closePanel = () => {
     lastFocusedNode.focus();
   }
   syncPanelAria();
+  panel.style.removeProperty("--panel-left");
+  panel.style.removeProperty("--panel-top");
+  panel.style.removeProperty("--panel-width");
 };
 
 const onResize = () => {
+  syncFieldScale();
   updateLines();
   updateAura();
+  updatePanelPosition();
   syncPanelAria();
 };
 
@@ -416,6 +479,7 @@ const init = (islands) => {
   window.__islands = islands;
   renderNodes(islands);
   buildLines();
+  syncFieldScale();
 
   requestAnimationFrame(() => {
     fieldSection.classList.add("is-ready");
@@ -435,6 +499,22 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+document.addEventListener("pointerdown", (event) => {
+  if (!mobileSheetQuery.matches) {
+    return;
+  }
+  if (!panel.classList.contains("is-open")) {
+    return;
+  }
+  if (panel.contains(event.target)) {
+    return;
+  }
+  if (event.target.closest(".island-node")) {
+    return;
+  }
+  closePanel();
+});
+
 fetch("data/islands.json")
   .then((response) => response.json())
   .then((data) => init(data))
@@ -444,7 +524,22 @@ fetch("data/islands.json")
   });
 
 window.addEventListener("load", () => {
+  syncFieldScale();
   updateLines();
+  updatePanelPosition();
 });
 
-mobileSheetQuery.addEventListener("change", syncPanelAria);
+mobileSheetQuery.addEventListener("change", () => {
+  syncPanelAria();
+  updatePanelPosition();
+});
+
+window.addEventListener(
+  "scroll",
+  () => {
+    if (mobileSheetQuery.matches && panel.classList.contains("is-open")) {
+      updatePanelPosition();
+    }
+  },
+  { passive: true }
+);
