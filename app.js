@@ -55,7 +55,7 @@ const positions = {
   "cabo-verde": { col: 7, row: 12, span: 1 },
   mindelo: { col: 6, row: 12, span: 1 },
   "sao-tome": { col: 9, row: 13, span: 1 },
-  falklands: { col: 8, row: 14, span: 2 }
+  falklands: { col: 2, row: 16, span: 2 }
 };
 
 const maxGridRow = Math.max(
