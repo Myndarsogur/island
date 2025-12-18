@@ -12,6 +12,7 @@
   --shadow-soft: 0 18px 40px rgba(20, 24, 38, 0.16);
   --shadow-hard: 0 24px 50px rgba(20, 24, 38, 0.22);
   --map-offset-x: 0%;
+  --map-offset-y: 1%;
 }
 
 * {
@@ -183,6 +184,7 @@ main {
   overflow: hidden;
   padding: clamp(1rem, 3vw, 2rem);
   --map-offset-x: -4%;
+  --map-offset-y: 1%;
   --field-scale: 1;
   --drift-x: 0px;
   --drift-y: 0px;
@@ -208,11 +210,14 @@ main {
 }
 
 .field__lines {
+  inset: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  transform: translateX(var(--map-offset-x)) translate(var(--line-drift-x), var(--line-drift-y));
-  transition: transform 0.4s ease;
   z-index: 0;
 }
 
@@ -253,7 +258,6 @@ main {
 
 .field__nodes {
   position: relative;
-  inset: auto;
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -261,10 +265,11 @@ main {
   gap: clamp(0.85rem, 2vw, 1.6rem);
   align-content: space-between;
   min-height: clamp(24rem, 60vh, 40rem);
-  transform: translateX(var(--map-offset-x)) scale(var(--field-scale));
-  transform-origin: top center;
+  left: 50%;
+  transform-origin: top left;
+  transform: translateX(calc(-50% + var(--map-offset-x) + (1 - var(--field-scale)) * 50%)) translateY(var(--map-offset-y)) scale(var(--field-scale));
   width: calc(100% / var(--field-scale));
-  margin: 0 auto;
+  margin: 0;
 }
 
 .island-node {
@@ -522,7 +527,6 @@ main {
 
 @media (max-width: 43.75rem) {
   .field__stage {
-    min-height: auto;
     padding: clamp(1rem, 4vw, 1.5rem);
     --map-offset-x: 0%;
   }

@@ -69,6 +69,7 @@ const syncFieldScale = () => {
   const width = fieldStage.getBoundingClientRect().width || baseWidth;
   const clamped = Math.min(maxScale, Math.max(minScale, width / baseWidth));
   fieldStage.style.setProperty("--field-scale", clamped.toFixed(3));
+  scheduleLinesUpdate();
 };
 
 const mobilePlacements = (() => {
@@ -246,8 +247,11 @@ const buildLines = () => {
 
 // Compute line endpoints from node centers inside the stage.
 const updateLines = () => {
-  const stageRect = fieldStage.getBoundingClientRect();
-  linesSvg.setAttribute("viewBox", `0 0 ${stageRect.width} ${stageRect.height}`);
+  scheduledLineUpdate = null;
+  const svgRect = linesSvg.getBoundingClientRect();
+  linesSvg.setAttribute("viewBox", `0 0 ${svgRect.width} ${svgRect.height}`);
+  linesSvg.setAttribute("width", `${svgRect.width}`);
+  linesSvg.setAttribute("height", `${svgRect.height}`);
 
   lineElements.forEach((line) => {
     const fromNode = nodeMap.get(line.dataset.from);
@@ -259,16 +263,24 @@ const updateLines = () => {
     const fromRect = fromNode.getBoundingClientRect();
     const toRect = toNode.getBoundingClientRect();
 
-    const x1 = fromRect.left - stageRect.left + fromRect.width / 2;
-    const y1 = fromRect.top - stageRect.top + fromRect.height / 2;
-    const x2 = toRect.left - stageRect.left + toRect.width / 2;
-    const y2 = toRect.top - stageRect.top + toRect.height / 2;
+    const x1 = fromRect.left - svgRect.left + fromRect.width / 2;
+    const y1 = fromRect.top - svgRect.top + fromRect.height / 2;
+    const x2 = toRect.left - svgRect.left + toRect.width / 2;
+    const y2 = toRect.top - svgRect.top + toRect.height / 2;
 
     line.setAttribute("x1", x1.toFixed(1));
     line.setAttribute("y1", y1.toFixed(1));
     line.setAttribute("x2", x2.toFixed(1));
     line.setAttribute("y2", y2.toFixed(1));
   });
+};
+
+let scheduledLineUpdate = null;
+const scheduleLinesUpdate = () => {
+  if (scheduledLineUpdate !== null) {
+    cancelAnimationFrame(scheduledLineUpdate);
+  }
+  scheduledLineUpdate = requestAnimationFrame(updateLines);
 };
 
 const setHover = (id) => {
@@ -359,6 +371,7 @@ const updatePanelPosition = () => {
 
   panel.style.setProperty("--panel-left", `${left}px`);
   panel.style.setProperty("--panel-top", `${top}px`);
+  scheduleLinesUpdate();
 };
 
 const updateHighlightStates = () => {
@@ -410,6 +423,7 @@ const openPanel = (id) => {
   requestAnimationFrame(() => {
     panelClose.focus({ preventScroll: true });
   });
+  scheduleLinesUpdate();
 };
 
 const closePanel = () => {
@@ -425,11 +439,12 @@ const closePanel = () => {
   panel.style.removeProperty("--panel-left");
   panel.style.removeProperty("--panel-top");
   panel.style.removeProperty("--panel-width");
+  scheduleLinesUpdate();
 };
 
 const onResize = () => {
   syncFieldScale();
-  updateLines();
+  scheduleLinesUpdate();
   updateAura();
   updatePanelPosition();
   syncPanelAria();
@@ -481,7 +496,7 @@ const init = (islands) => {
 
   requestAnimationFrame(() => {
     fieldSection.classList.add("is-ready");
-    updateLines();
+    scheduleLinesUpdate();
     syncPanelAria();
   });
 
@@ -520,13 +535,14 @@ fetch("data/islands.json")
 
 window.addEventListener("load", () => {
   syncFieldScale();
-  updateLines();
+  scheduleLinesUpdate();
   updatePanelPosition();
 });
 
 mobileSheetQuery.addEventListener("change", () => {
   syncPanelAria();
   updatePanelPosition();
+  scheduleLinesUpdate();
 });
 
 window.addEventListener(
