@@ -323,13 +323,6 @@ const updatePanelPosition = () => {
     return;
   }
 
-  if (!mobileSheetQuery.matches) {
-    panel.style.removeProperty("--panel-left");
-    panel.style.removeProperty("--panel-top");
-    panel.style.removeProperty("--panel-width");
-    return;
-  }
-
   const node = activeId ? nodeMap.get(activeId) : null;
   if (!node) {
     return;
@@ -342,7 +335,12 @@ const updatePanelPosition = () => {
   const padding = 12;
   const offset = 14;
 
-  const maxWidth = Math.min(viewportWidth - padding * 2, 420);
+  const desktopMax = 520;
+  const mobileMax = 420;
+  const maxWidth = Math.min(
+    viewportWidth - padding * 2,
+    mobileSheetQuery.matches ? mobileMax : desktopMax
+  );
   panel.style.setProperty("--panel-width", `${maxWidth}px`);
 
   const panelRect = panel.getBoundingClientRect();
@@ -500,9 +498,6 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("pointerdown", (event) => {
-  if (!mobileSheetQuery.matches) {
-    return;
-  }
   if (!panel.classList.contains("is-open")) {
     return;
   }
